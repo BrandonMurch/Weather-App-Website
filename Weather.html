@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+  <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <title>Weather for You</title>
+    <link href="Weather.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="weather.js"></script>
+  </head>
+  <body>
+    <div class="containerWeather">
+      <div id="imaginaryContainer">
+                <div class="input-group stylish-input-group">
+                    <input type="text" class="form-control"  placeholder="Location" id="searchQuery" >
+                    <span class="input-group-addon" id="searchBtn">
+                        <button type="submit">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </span>
+                </div>
+            </div>
+      <div class ="temperature boxForInfo">
+        <div class="town" id="town"></div>
+        <div id="temperatureNumber"> </div>
+      </div>
+      <div class="windSpeed boxForInfo lowerbox" id="windText"></div>
+      <div class="skyCover boxForInfo lowerbox" id="skyText"></div>
+    </div>
+  </body>
+</html>

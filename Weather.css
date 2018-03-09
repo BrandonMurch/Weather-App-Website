@@ -1,0 +1,101 @@
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  text-shadow: 1px 1px 1px #000;
+  background-size: cover;
+  background-position: center;
+}
+
+h1 {
+  font-size: 120px !important;
+}
+
+h2 {
+margin: 10px;
+position: relative;
+top: 10px
+}
+
+.stylish-input-group .input-group-addon{
+    background: white !important;
+}
+.stylish-input-group .form-control{
+	border-right:0;
+	box-shadow:0 0 0;
+	border-color:#ccc;
+}
+.stylish-input-group button{
+    border:0;
+    background:transparent;
+}
+
+.boxForInfo{
+  background-color: rgba(200, 200, 200, 0.8);
+  box-shadow: 1px 1px 1px #000;
+  border-radius: 10px;
+}
+
+.containerWeather {
+  width: 600px;
+  height: 600px;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.temperature {
+  height: 300px;
+  width: 400px;
+  position: relative;
+  left: 100px;
+}
+
+.town {
+  text-align: center;
+}
+
+.lowerbox{
+  width: 190px;
+  position: absolute;
+  margin: 10px;
+}
+
+.lowerText {
+  font-size: 40px ;
+  text-align: center;
+  margin-top: 5px;
+}
+
+
+.windSpeed {
+  left: 90px;
+}
+
+.skyCover {
+  left: 300px;
+}
+
+#imaginaryContainer {
+  width: 400px;
+  position: relative;
+  left: 100px;
+}
+
+#town {
+  margin: 30px;
+}
+
+#temperature {
+  float: right;
+  margin: 20px;
+  display: inline;
+}
+
+#icon {
+  position: absolute;
+  right: 250px;
+  height: 160px;
+}
