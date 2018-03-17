@@ -8,11 +8,7 @@ $.get("http://ipinfo.io", function(response) {
   var  postal = response.postal;
   var link = "lat=" + roundNumber(location[0]) + "&lon=" + roundNumber(location[1]);
   getWeather(link);
-  document.getElementById("searchQuery").onkeydown = function(event) {
-    if (event.keyCode == 13) {
-      $("#searchBtn").click();
-    }
-  }
+
 }, "jsonp");
 };
 //JSONP request to get weather data
@@ -122,4 +118,9 @@ $(document).on("click","#searchBtn",function searchQuery(){
 $(document).ready(function(){
   document.getElementById('searchQuery').value='';
   getLocation();
+  document.getElementById("searchQuery").onkeydown = function(event) {
+    if (event.keyCode == 13) {
+      $("#searchBtn").click();
+    }
+  }
 });
