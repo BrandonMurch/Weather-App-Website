@@ -1,126 +1,130 @@
-//Gets the location of the user via their IP address, then automatically searches for the weather in their location
-function getLocation() {
-$.get("http://ipinfo.io", function(response) {
-  var  city = response.city;
-  var  country = response.country;
-  var  ip = response.ip;
-  var  location = response.loc.split(",");
-  var  postal = response.postal;
-  var link = "lat=" + roundNumber(location[0]) + "&lon=" + roundNumber(location[1]);
-  getWeather(link);
+/*
+@description - Get the weather of a location by IP addres or search
+@input - Input location via search bar. Submit by clicking the button or pressing enter.
+@author - Brandon - Brandon.Murch@protonmail.com
+*/
+
+
+
+                /*Gets the location of the user via their IP address,
+                then automatically searches for the weather in their location*/
+const getLocation = () => {
+$.get("http://ipinfo.io", (response) => {
+  let location = response.loc.split(",");
+  getWeather("lat=" + roundNumber(location[0]) + "&lon=" + roundNumber(location[1]));
 
 }, "jsonp");
 };
-//JSONP request to get weather data
-function getWeather(link){
-  $.get("https://api.openweathermap.org/data/2.5/weather\?" + link + "&APPID=6c872f011601e23a892e15b2e285e699", function(data) {
-    var  temperature = data.main.temp;
-    var    windSpeed = data.wind.speed;
-    var    windDeg = data.wind.deg;
-    var    weatherMain = data.weather[0].main;
-    var    weatherIcon = data.weather[0].icon;
-    var    tempID = data.weather[0].id;
-    var    city = data.name;
-    var    country = data.sys.country
-    console.log(city, country, tempID);
-    $("#town").html("<h2> Weather for " + city + ", " + country + ".</h2>");
-    if (country === "us"){
-      $("#temperatureNumber").html("<h1 id='temperature'><img id='icon' src='http://openweathermap.org/img/w/" + weatherIcon + ".png'> " + kToF(temperature) + "<sup>&#176;c</sup></h1>");
+                //JSONP request to get weather data
+const getWeather = (link) => {
+  $.get("https://api.openweathermap.org/data/2.5/weather\?" + link
+    + "&APPID=6c872f011601e23a892e15b2e285e699", (data) => {
+    let windDir;
+    $(".weather__text--town").html("Weather for " + data.name + ", " + data.sys.country);
+    if (data.sys.country === "us"){
+      $(".weather__text--temperature")
+      .html("<img class='weather__icon' src='http://openweathermap.org/img/w/"
+      + data.weather[0].icon + ".png'> " + kToF(data.main.temp)
+      + "<sup>&#176;c</sup>");
     }else{
-      $("#temperatureNumber").html("<h1 id='temperature'><img id='icon' src='http://openweathermap.org/img/w/" + weatherIcon + ".png'> " + kToC(temperature) + "<sup>&#176;c</sup></h1>");
+      $(".weather__text--temperature")
+      .html("<img class='weather__icon' src='http://openweathermap.org/img/w/"
+      + data.weather[0].icon + ".png'> " + kToC(data.main.temp)
+      + "<sup>&#176;c</sup>");
     };
-    $("#skyText").html("<h6 class='lowerText'>" + weatherMain + "</h6>");
+    $(".weather__text--skyCover").html(data.weather[0].main);
     switch (true){
-        case windDeg > 337:
+        case data.wind.deg > 337:
         windDir = "N"
         break;
-        case windDeg > 293:
+        case data.wind.deg > 293:
         windDir = "NW"
         break;
-        case windDeg > 248:
+        case data.wind.deg > 248:
         windDir = "W"
         break;
-        case windDeg > 203:
+        case data.wind.deg > 203:
         windDir = "SW"
         break;
-        case windDeg > 158:
+        case data.wind.deg > 158:
         windDir = "S"
         break;
-        case windDeg > 113:
+        case data.wind.deg > 113:
         windDir = "SE"
         break;
-        case windDeg > 68:
+        case data.wind.deg > 68:
         windDir = "E"
         break;
-        case windDeg > 23:
+        case data.wind.deg > 23:
         windDir = "NE"
         break;
-        case windDeg >= 0:
+        case data.wind.deg >= 0:
         windDir = "N"
         break;
       }
-    $("#windText").html("<h6 class='lowerText'>" + windSpeed + " " + windDir + "</h6>");
-    getBackground(temperature, tempID);
+    $(".weather__text--windSpeed").html(data.wind.speed + " " + windDir);
+    getBackground(data.main.temp, data.weather[0].id);
 
-  }, "jsonp").fail(function() {
+  }, "jsonp").fail(() => {
     alert('City Not Found.');
   });
 };
-//round a number
-function roundNumber(number){
+                //round a number
+const roundNumber = (number) => {
   return Math.floor(number)
 };
-//converting kelvin to celsius
-function kToC(temperature){
+                //converting kelvin to celsius
+const kToC = (temperature) => {
   return roundNumber(temperature - 273.15)
 };
-//converting kelvin to fahrenheit
-function kToF(temperature){
+                //converting kelvin to fahrenheit
+const kToF = (temperature) => {
   return roundNumber(temperature * (9/5) - 459.67)
 };
-//getting the background image depending on the weather
-function getBackground(temperature, id){
+                //getting the background image depending on the weather
+const getBackground = (temperature, id) => {
   switch (true){
     case id >= 600 && id <= 650:
-      $("body").css("background-image", "url(https://s20.postimg.org/dx598nnsd/tree-branch-snow-cold-winter-flower-1394449-pxhere.com-min.jpg)");
+      $(".background").css("background-image", "url(https://s20.postimg.org/dx598nnsd/tree-branch-snow-cold-winter-flower-1394449-pxhere.com-min.jpg)");
       break;
     case id >= 300 && id <= 550:
-      $("body").css("background-image", "url(https://s20.postimg.org/c5cadqwpp/raining-on-at-the-pier-min.jpg)");
+      $(".background").css("background-image", "url(https://s20.postimg.org/c5cadqwpp/raining-on-at-the-pier-min.jpg)");
       break;
     case id >= 200 && id <= 250:
-      $("body").css("background-image", "url(https://s20.postimg.org/qwpwdz8p9/nature-sky-night-atmosphere-weather-storm-725473-pxhere.com-min.jpg)");
+      $(".background").css("background-image", "url(https://s20.postimg.org/qwpwdz8p9/nature-sky-night-atmosphere-weather-storm-725473-pxhere.com-min.jpg)");
       break;
     case temperature >= 305:
-      $("body").css("background-image", "url(https://s20.postimg.org/htil4mlml/beach-landscape-coast-nature-sand-sunlight-496230-pxhere.com-min.jpg)");
+      $(".background").css("background-image", "url(https://s20.postimg.org/htil4mlml/beach-landscape-coast-nature-sand-sunlight-496230-pxhere.com-min.jpg)");
       break;
     case temperature <= 277:
-      $("body").css("background-image", "url(https://s20.postimg.org/ms63j5x59/landscape-tree-nature-forest-branch-mountain-1164378-pxhere.com-.jpg)");
+      $(".background").css("background-image", "url(https://s20.postimg.org/ms63j5x59/landscape-tree-nature-forest-branch-mountain-1164378-pxhere.com-.jpg)");
       break;
     case id >= 801 && id <= 850:
-      $("body").css("background-image", "url(https://s20.postimg.org/pm98wljvx/nature-mountain-snow-cloud-mist-cloudy-1327773-pxhere.com-min.jpg)");
+      $(".background").css("background-image", "url(https://s20.postimg.org/pm98wljvx/nature-mountain-snow-cloud-mist-cloudy-1327773-pxhere.com-min.jpg)");
       break;
     default:
-      $("body").css("background-image", "url(https://s20.postimg.org/64elgopj1/landscape-sea-coast-nature-grass-rock-112839-pxhere.com-min.jpg)");
+      $(".background").css("background-image", "url(https://s20.postimg.org/64elgopj1/landscape-sea-coast-nature-grass-rock-112839-pxhere.com-min.jpg)");
   }
 };
-//for preparing a string to be turned into a link (lowercase and ecoding)
-function prepareForLink(string){
+                //for preparing a string to be turned into a link (lowercase and ecoding)
+const prepareForLink = (string) => {
   return encodeURIComponent(string.toLowerCase());
 };
-//Getting the weather via the search bar
-$(document).on("click","#searchBtn",function searchQuery(){
-  var inputLoc = $('#searchQuery').val();
+                //Getting the weather via the search bar
+$(document).on("click",".weather__searchButton", () =>{
+  var inputLoc = $('.weather__searchInput').val();
   var link = "q=" + prepareForLink(inputLoc)
   getWeather(link);
-  document.getElementById('searchQuery').value='';
+  document.getElementsByClassName('weather__searchInput')[0].value='';
 });
-//automatic running of the location and weather jsonp call
-$(document).ready(function(){
-  document.getElementById('searchQuery').value='';
+                //automatic running of the location and weather jsonp call
+$(document).ready(() => {
+  document.getElementsByClassName('weather__searchInput')[0].value='';
   getLocation();
-  document.getElementById("searchQuery").onkeydown = function(event) {
+  document.getElementsByClassName("weather__searchInput")[0]
+    .onkeydown = function(event) {
     if (event.keyCode == 13) {
-      $("#searchBtn").click();
+      $(".weather__searchButton").click();
     }
   }
 });

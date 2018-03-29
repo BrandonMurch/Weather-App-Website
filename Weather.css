@@ -1,101 +1,119 @@
-html, body {
+/*
+
+This document is written in BEM.
+Block = .block
+Element = .block__element
+Modifier = .block__element--modifier || .block--modifier
+
+Bootstrap CSS is also included in the HTML document.
+
+*/
+
+/* Block ******************************************************************/
+
+.html{
+  height:100%;
+}
+
+.background {
   height: 100%;
   width: 100%;
   margin: 0;
   padding: 0;
-  text-shadow: 1px 1px 1px #000;
   background-size: cover;
   background-position: center;
 }
 
-h1 {
-  font-size: 120px !important;
-}
-
-h2 {
-margin: 10px;
-position: relative;
-top: 10px
-}
-
-.stylish-input-group .input-group-addon{
-    background: white !important;
-}
-.stylish-input-group .form-control{
-	border-right:0;
-	box-shadow:0 0 0;
-	border-color:#ccc;
-}
-.stylish-input-group button{
-    border:0;
-    background:transparent;
-}
-
-.boxForInfo{
-  background-color: rgba(200, 200, 200, 0.8);
-  box-shadow: 1px 1px 1px #000;
-  border-radius: 10px;
-}
-
-.containerWeather {
-  width: 600px;
-  height: 600px;
-  position: relative;
+.weather {
+  width: 50vw;
+  height: 50vw;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-.temperature {
-  height: 300px;
-  width: 400px;
-  position: relative;
-  left: 100px;
-}
 
-.town {
-  text-align: center;
-}
+/* Element ****************************************************************/
 
-.lowerbox{
-  width: 190px;
+.weather__container{
+  background-color: rgba(200, 200, 200, 0.8);
+  box-shadow: 1px 1px 1px #000;
+  border-radius: 10px;
   position: absolute;
-  margin: 10px;
+
 }
 
-.lowerText {
-  font-size: 40px ;
+.weather__text {
+  font-size: 4vw ;
   text-align: center;
   margin-top: 5px;
+  text-shadow: 1px 1px 1px #000;
 }
 
-
-.windSpeed {
-  left: 90px;
-}
-
-.skyCover {
-  left: 300px;
-}
-
-#imaginaryContainer {
-  width: 400px;
-  position: relative;
-  left: 100px;
-}
-
-#town {
-  margin: 30px;
-}
-
-#temperature {
-  float: right;
-  margin: 20px;
-  display: inline;
-}
-
-#icon {
+.weather__icon {
   position: absolute;
-  right: 250px;
-  height: 160px;
+  right: 55%;
+  bottom: 5%;
+  height: 60%;
+}
+
+.weather__town {
+  text-align: center;
+}
+
+.weather__search {
+  width: 85%;
+  position: relative;
+  left: 7.5%;
+}
+
+.weather__searchButton{
+    border:0;
+    background:transparent;
+}
+
+.weather__searchInput{
+	border-right:0;
+	box-shadow:0 0 0;
+	border-color:#ccc;
+}
+
+
+/* Modifier ***************************************************************/
+
+.weather__container--temperature {
+  height: 65%;
+  width: 85%;
+  left: 7.5%;
+  top: 20%;
+}
+
+.weather__container--lower{
+  height: 12%;
+  width: 35%;
+  bottom: 0;
+  margin: 1%;
+}
+
+.weather__container--windSpeed {
+  left: 6%;
+}
+
+.weather__container--skyCover {
+  right: 6%;
+}
+
+.weather__text--town {
+  margin: 1%;
+  position: absolute;
+  top: 1%;
+}
+
+.weather__text--temperature {
+  font-size: 10vw;
+  float: right;
+  margin-top: 32%;
+  padding-right: 5%;
+  display: inline;
 }

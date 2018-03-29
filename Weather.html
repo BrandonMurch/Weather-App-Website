@@ -1,32 +1,39 @@
 <!doctype html>
-<html>
+<html class="html">
   <head>
+    <meta name="author" content="Brandon Murch">
+    <meta name="description" content="Get the weather of a location by IP addres or search">
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
     <meta content="utf-8" http-equiv="encoding">
     <title>Weather for You</title>
-    <link href="Weather.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="Weather.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="weather.js"></script>
   </head>
-  <body>
-    <div class="containerWeather">
-      <div id="imaginaryContainer">
-                <div class="input-group stylish-input-group">
-                    <input type="text" class="form-control"  placeholder="Location" id="searchQuery" >
-                    <span class="input-group-addon" id="searchBtn">
-                        <button type="submit">
-                            <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                    </span>
-                </div>
-            </div>
-      <div class ="temperature boxForInfo">
-        <div class="town" id="town"></div>
-        <div id="temperatureNumber"> </div>
+  <body class="background">
+    <div class="weather">
+      <div class="weather__search input-group stylish-input-group">
+        <input type="text" class="weather__searchInput form-control"
+          placeholder="Location">
+        <span class="input-group-addon">
+          <button type="weather__searchButton submit">
+            <span class="glyphicon glyphicon-search"></span>
+          </button>
+            </span>
+        </div>
+      <div class ="weather__container weather__container--temperature">
+        <div class="weather__town">
+          <h2 class="weather__text weather__text--town"></h2>
+        </div>
+        <h1 class="weather__text weather__text--temperature"> </h1>
       </div>
-      <div class="windSpeed boxForInfo lowerbox" id="windText"></div>
-      <div class="skyCover boxForInfo lowerbox" id="skyText"></div>
+      <div class="weather__container weather__container--windSpeed weather__container--lower" id="windText">
+        <h6 class='weather__text weather__text--windSpeed'></h6>
+      </div>
+      <div class="weather__container weather__container--skyCover weather__container--lower" id="skyText">
+        <h6 class='weather__text weather__text--skyCover'></h6>
+      </div>
     </div>
   </body>
 </html>
